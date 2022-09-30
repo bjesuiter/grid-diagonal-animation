@@ -1,0 +1,153 @@
+:root {
+  /* Nice Values */
+  /*
+
+  */
+
+  /* Debug Values */
+}
+
+/**
+ * Grid Definition & Animation Area
+ */
+
+@keyframes simpleZoom {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/**
+ * These Classes will be set by JS
+ */
+
+.animate-fast {
+  --delay: 0.3;
+  --duration: 0.3s;
+}
+
+.animate-slow {
+  --delay: 1;
+  --duration: 1s;
+}
+
+.grid {
+  /* --grid-cols defined in js */
+  /* --grid-rows defined in js */
+
+  display: grid;
+  /*grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));*/
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  width: 100%;
+  height: 100%;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-gap: 8px;
+}
+
+.tile {
+  background-color: grey;
+  text-align: center;
+  content: '' + var(--index);
+  width: 300px;
+  height: 200px;
+
+  animation: var(--duration) ease-out
+    calc(var(--duration) * var(--delay) * var(--diagonal-animation-group)) 1
+    simpleZoom;
+  animation-fill-mode: both;
+}
+
+/**
+ * Animation Group coloring
+ * Only for debugging, animation will be directly calculated for all cells
+ */
+.tile[data-diagonalAnimationGroup='0'],
+.tile[data-diagonalAnimationGroup='5'] {
+  background-color: #ff9f1c;
+}
+.tile[data-diagonalAnimationGroup='1'],
+.tile[data-diagonalAnimationGroup='6'] {
+  background-color: #ffbf69;
+}
+.tile[data-diagonalAnimationGroup='2'],
+.tile[data-diagonalAnimationGroup='7'] {
+  background-color: #ffe6a7;
+}
+.tile[data-diagonalAnimationGroup='3'],
+.tile[data-diagonalAnimationGroup='8'] {
+  background-color: #cbf3f0;
+}
+.tile[data-diagonalAnimationGroup='4'],
+.tile[data-diagonalAnimationGroup='9'] {
+  background-color: #2ec4b6;
+}
+
+/**
+ * Body Definitions
+ */
+
+body {
+  position: relative;
+}
+
+h1,
+h2 {
+  font-family: Lato;
+}
+
+.toolbar {
+  margin-bottom: 10px;
+}
+
+/**
+ * CSS Custom Property Typings
+ */
+@property --index {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --delay {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --duration {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --element-count {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --grid-cols {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --grid-rows {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+/**
+ * Used for setting the correct animation delay for all diagonal cells
+ * see calculation in index.ts
+ */
+@property --diagonal-animation-group {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
