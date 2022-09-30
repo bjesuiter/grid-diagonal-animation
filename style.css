@@ -1,12 +1,3 @@
-:root {
-  /* Nice Values */
-  /*
-
-  */
-
-  /* Debug Values */
-}
-
 /**
  * Grid Definition & Animation Area
  */
@@ -25,7 +16,9 @@
  */
 
 .animate-fast {
+  /* --delay MUST be a number, bc. it's used with calc()*/
   --delay: 0.3;
+  /* --duration MUST be a <time>, bc. it's used directly in animation timing function*/
   --duration: 0.3s;
 }
 
@@ -112,16 +105,18 @@ h2 {
   initial-value: 0;
 }
 
+/* --delay MUST be a number, bc. it's used with calc()*/
 @property --delay {
   syntax: '<number>';
-  inherits: false;
+  inherits: true;
   initial-value: 0;
 }
 
+/* --duration MUST be a <time>, bc. it's used directly in animation timing function*/
 @property --duration {
-  syntax: '<number>';
-  inherits: false;
-  initial-value: 0;
+  syntax: '<time>';
+  inherits: true;
+  initial-value: 1s;
 }
 
 @property --element-count {

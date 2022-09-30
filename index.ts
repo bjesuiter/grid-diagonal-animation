@@ -3,8 +3,6 @@ import './style.css';
 
 // Generate Tiles
 function generateTiles(grid: HTMLElement, elemCount: number, gridCols: number) {
-  //
-  //
   /**
    * Idea: A diagonal for my case is defined by:
    * indexOfTile % --gridCols
@@ -58,19 +56,21 @@ function generateGrid(elemCount: number, gridCols: number) {
   return grid;
 }
 
-document.querySelectorAll('button').forEach((button) => {
-  button.addEventListener('click', (e: Event) => {
-    const target = document.querySelector('.templateTarget');
-    const oldGrid = document.querySelector('.grid');
-    const animSpeed = (e.target as HTMLButtonElement).getAttribute(
-      'data-animation-speed'
-    );
+const buttonEventListener = (e: Event) => {
+  const target = document.querySelector('.templateTarget');
+  const oldGrid = document.querySelector('.grid');
+  const animSpeed = (e.target as HTMLButtonElement).getAttribute(
+    'data-animation-speed'
+  );
 
-    const newGrid = generateGrid(20, 4);
-    newGrid.classList.add(animSpeed);
+  const newGrid = generateGrid(20, 3);
+  newGrid.classList.add(animSpeed);
 
-    if (oldGrid) oldGrid.remove();
+  if (oldGrid) oldGrid.remove();
 
-    target.appendChild(newGrid);
-  });
+  target.appendChild(newGrid);
+};
+
+document.querySelectorAll('button.animate').forEach((button) => {
+  button.addEventListener('click', buttonEventListener);
 });
